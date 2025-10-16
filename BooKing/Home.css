@@ -1,0 +1,472 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: #ffffff;
+    color: #1a1a1a;
+    line-height: 1.6;
+}
+html {
+  scroll-behavior: smooth;
+}
+section {
+  scroll-margin-top: 80px; 
+}
+
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* Navigation */
+.navbar {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo-img { 
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, #FFD700, #FF3B3B, #FF8C00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-family: 'Times New Roman', Georgia, serif;
+    color: #FF3B3B;
+}
+
+.nav-links {
+    display: none;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.nav-links a {
+    font-size: 0.875rem;
+    color: #1a1a1a;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.nav-links a:hover {
+    color: #14b8a6;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.search-box {
+    position: relative;
+    display: none;
+}
+
+.search-icon {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9ca3af;
+}
+
+.search-input {
+    padding: 0.5rem 0.75rem 0.5rem 2.5rem;
+    width: 16rem;
+    border: 1px solid #e5e5e5;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.search-input:focus {
+    border-color: #14b8a6;
+}
+
+.icon-btn {
+    width: 2.5rem;
+    height: 2.5rem;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.375rem;
+    transition: background-color 0.2s;
+}
+
+.icon-btn:hover {
+    background-color: #f3f4f6;
+}
+
+.icon-btn svg {
+    color: #1a1a1a;
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    height: 400px;
+    background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
+    overflow: hidden;
+    background-image: url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1600&h=600&fit=crop');
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.hero-content {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.hero-title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+.logo-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: inherit;
+}
+
+.hero-subtitle {
+    font-size: 1.125rem;
+    margin-bottom: 2rem;
+    max-width: 42rem;
+}
+.hero-btn {
+    display: inline-block;
+    text-decoration: none;
+    padding: 1.5rem 2rem;
+    background-color: #14b8a6;
+    color: white;
+    font-size: 1.125rem;
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-weight: 500;
+}
+
+.hero-btn:hover {
+    background-color: #0d9488;
+}
+
+
+/* Sections */
+.section {
+    padding: 4rem 0;
+}
+
+.section-title {
+    font-size: 2.25rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+}
+
+/* Carousel */
+.carousel-container {
+    position: relative;
+}
+
+.carousel-wrapper {
+    overflow: hidden;
+}
+
+.carousel {
+    display: flex;
+    gap: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.book-card {
+    flex: 0 0 calc(25% - 1.125rem);
+    min-width: 250px;
+    background-color: white;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+}
+
+.book-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.book-image {
+    width: 100%;
+    height: 360px;
+    object-fit: cover;
+}
+
+.book-info {
+    padding: 1rem;
+}
+
+.book-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.book-description {
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    border: none;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    z-index: 10;
+}
+
+.carousel-btn:hover {
+    background-color: #14b8a6;
+}
+
+.carousel-btn:hover svg {
+    color: white;
+}
+
+.carousel-btn svg {
+    color: #1a1a1a;
+}
+
+.carousel-btn-left {
+    left: -1.5rem;
+}
+
+.carousel-btn-right {
+    right: -1.5rem;
+}
+
+.carousel-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.carousel-btn:disabled:hover {
+    background-color: white;
+}
+
+.carousel-btn:disabled:hover svg {
+    color: #1a1a1a;
+}
+
+/* Categories Grid */
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.category-card {
+    position: relative;
+    height: 12rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.category-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.category-card:hover .category-image {
+    transform: scale(1.1);
+}
+
+.category-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.category-card:hover .category-overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.category-name {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Footer */
+.footer {
+    background-color: #f9fafb;
+    border-top: 1px solid #e5e5e5;
+    margin-top: 4rem;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 2rem 0;
+}
+
+.footer-links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.footer-links a {
+    font-size: 0.875rem;
+    color: #6b7280;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: #14b8a6;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.footer-copyright {
+    text-align: center;
+    font-size: 0.875rem;
+    color: #6b7280;
+    padding-bottom: 2rem;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+    .nav-links {
+        display: flex;
+    }
+
+    .search-box {
+        display: block;
+    }
+
+    .hero-title {
+        font-size: 3.75rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.25rem;
+    }
+
+    .categories-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .footer-content {
+        flex-direction: row;
+    }
+}
+
+@media (max-width: 1024px) {
+    .book-card {
+        flex: 0 0 calc(33.333% - 1rem);
+        min-width: 200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .book-card {
+        flex: 0 0 calc(50% - 0.75rem);
+        min-width: 180px;
+    }
+
+    .carousel-btn {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+
+    .carousel-btn-left {
+        left: -0.5rem;
+    }
+
+    .carousel-btn-right {
+        right: -0.5rem;
+    }
+}

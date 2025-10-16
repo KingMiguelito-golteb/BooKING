@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>S4P Loader (Optimized)</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #000;
+      color: white;
+      font-family: sans-serif;
+      overflow: hidden;
+      height: 100vh;
+    }
+
+    /* Loader area (centered, smaller to reduce GPU load) */
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #000;
+      z-index: 999;
+      transition: opacity 1s ease;
+    }
+
+    #loader.fade {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Smaller Unicorn embed */
+    [data-us-project] {
+      width: 800px;
+      height: 500px;
+      max-width: 90%;
+    }
+
+    /* Main site (hidden initially) */
+    #main {
+      opacity: 0;
+      transition: opacity 1s ease-in;
+      text-align: center;
+      padding-top: 20vh;
+    }
+
+    #main.show {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div id="loader">
+    <div data-us-project="Gx5ayOvlyRBC9F6s9YBr"></div>
+  </div>
+
+  <div id="main">
+    <h1>Welcome to BooKING</h1>
+   
+  </div>
+
+  <script>
+    if (!window.UnicornStudioLoaded) {
+      window.UnicornStudioLoaded = true;
+      !function(){
+        if(!window.UnicornStudio){
+          window.UnicornStudio={isInitialized:!1};
+          var i=document.createElement("script");
+          i.src="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.33/dist/unicornStudio.umd.js";
+          i.onload=function(){
+            if(!window.UnicornStudio.isInitialized){
+              UnicornStudio.init();
+              window.UnicornStudio.isInitialized=!0;
+            }
+          };
+          (document.head || document.body).appendChild(i);
+        }
+      }();
+    }
+
+    // Auto fade out after 4 seconds
+    setTimeout(() => {
+      const loader = document.getElementById('loader');
+      loader.classList.add('fade');
+      setTimeout(() => {
+        document.getElementById('main').classList.add('show');
+      }, 1000);
+    }, 4000);
+  </script>
+</body>
+</html>
