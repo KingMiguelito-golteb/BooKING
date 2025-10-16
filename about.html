@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About BooKING</title>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #f8f9fa;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: #ffffff;
+      padding: 1rem 0;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+      width: 100%;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .logo-text {
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, #FFD700, #FF3B3B, #FF8C00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .nav-link {
+      color: #2E382E;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+    }
+
+    .nav-link:hover {
+      color: #50C9CE;
+      background-color: rgba(80, 201, 206, 0.1);
+    }
+
+    .nav-login .login-btn {
+      background-color: #CFF3F5;
+      color: black;
+      text-decoration: none;
+      padding: 0.5rem 1.5rem;
+      border-radius: 12px;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+
+    .nav-login .login-btn:hover {
+      background-color: #45a8ac;
+    }
+
+    /* Flipbook Container */
+    .flipbook-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      background: #f8f9fa;
+    }
+
+    .book-wrapper {
+      position: relative;
+    }
+
+    .book-container {
+      position: relative;
+      width: 900px;
+      height: 600px;
+      perspective: 2000px;
+    }
+
+    .book-shadow {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.2);
+      filter: blur(20px);
+      transform: translateY(16px) scale(0.95);
+      border-radius: 12px;
+    }
+
+    .book {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+      overflow: hidden;
+      border: 1px solid #e5e7eb;
+    }
+
+    .current-page {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 50%;
+      height: 100%;
+      z-index: 2;
+    }
+
+    .previous-page {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 50%;
+      height: 100%;
+      background: rgba(248, 250, 252, 0.5);
+      border-right: 1px solid #e5e7eb;
+      z-index: 1;
+    }
+
+    .previous-page .page-content {
+      opacity: 0.6;
+    }
+
+    .flipping-page {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 50%;
+      height: 100%;
+      transform-origin: left;
+      transform-style: preserve-3d;
+      z-index: 10;
+    }
+
+    .book-spine {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      width: 2px;
+      height: 100%;
+      background: #e5e7eb;
+      transform: translateX(-50%);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      z-index: 20;
+    }
+
+    /* Page Content */
+    .page-content {
+      width: 100%;
+      height: 100%;
+      padding: 3rem;
+    }
+
+    .cover-content {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(147, 51, 234, 0.1), rgba(255, 255, 255, 1));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .regular-content {
+      background: white;
+      border-right: 1px solid #e5e7eb;
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #1f2937;
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #1f2937;
+      margin-bottom: 1.5rem;
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #1f2937;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: #6b7280;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    ul {
+      list-style: none;
+      space-y: 1rem;
+    }
+
+    li {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    li span:first-child {
+      color: #3b82f6;
+      margin-right: 0.75rem;
+      font-size: 1.25rem;
+    }
+
+    .space-y-4 > * + * {
+      margin-top: 1rem;
+    }
+
+    .space-y-6 > * + * {
+      margin-top: 1.5rem;
+    }
+
+    /* Navigation */
+    .navigation {
+      position: absolute;
+      bottom: -4rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .nav-button {
+      background: white;
+      color: #6b7280;
+      border: 1px solid #e5e7eb;
+      padding: 0.75rem;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-button:hover:not(:disabled) {
+      background: #3b82f6;
+      color: white;
+      border-color: #3b82f6;
+    }
+
+    .nav-button:disabled {
+      background: #f3f4f6;
+      color: #d1d5db;
+      cursor: not-allowed;
+    }
+
+    .page-counter {
+      font-size: 0.875rem;
+      color: #6b7280;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+    }
+
+    /* Animations */
+    @keyframes flipForward {
+      0% {
+        transform: rotateY(0deg);
+      }
+      50% {
+        transform: rotateY(-90deg);
+      }
+      100% {
+        transform: rotateY(-180deg);
+      }
+    }
+
+    @keyframes flipBackward {
+      0% {
+        transform: rotateY(-180deg);
+      }
+      50% {
+        transform: rotateY(-90deg);
+      }
+      100% {
+        transform: rotateY(0deg);
+      }
+    }
+
+    .backface-hidden {
+      backface-visibility: hidden;
+    }
+
+    /* Hide elements during animation */
+    .hide-during-animation {
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <img src="Assets/logo.png" alt="BooKING Logo" class="logo-img" />
+        <span class="logo-text">BooKING</span>
+      </div>
+      <div class="nav-menu">
+        <a href="Home.html" class="nav-link">Home</a>
+        <a href="Shop.html" class="nav-link">Shop</a>
+        <a href="about.html" class="nav-link active">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </div>
+      <div class="nav-login">
+        <a href="welcome.html" class="login-btn">Login</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- FLIPBOOK SECTION -->
+  <div class="flipbook-container">
+    <div class="book-wrapper">
+      <div class="book-container">
+        <div class="book-shadow"></div>
+        
+        <div class="book">
+          <!-- Current Page (Right Side) -->
+          <div class="current-page" id="currentPage">
+            <!-- Page content will be inserted here by JavaScript -->
+          </div>
+
+          <!-- Previous Page (Left Side) -->
+          <div class="previous-page" id="previousPage">
+            <!-- Page content will be inserted here by JavaScript -->
+          </div>
+
+          <!-- Book Spine -->
+          <div class="book-spine"></div>
+        </div>
+      </div>
+
+      <!-- Navigation Controls -->
+      <div class="navigation">
+        <button class="nav-button" id="prevButton" disabled>
+          <i data-lucide="chevron-left" width="20" height="20"></i>
+        </button>
+        
+        <div class="page-counter" id="pageCounter">
+          Page 1 of 5
+        </div>
+        
+        <button class="nav-button" id="nextButton">
+          <i data-lucide="chevron-right" width="20" height="20"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Page data - exactly the same as React version
+    const pages = [
+      {
+        id: 0,
+        content: `
+          <div class="page-content cover-content">
+            <div class="text-center px-8">
+              <h1 class="text-5xl font-bold text-foreground mb-4">Interested in Us?</h1>
+              <p class="text-muted-foreground text-lg">Flip through to learn more</p>
+            </div>
+          </div>
+        `,
+        isCover: true
+      },
+      {
+        id: 1,
+        content: `
+          <div class="page-content regular-content">
+            <h2 class="text-3xl font-bold text-foreground mb-6">Our Story</h2>
+            <p class="text-muted-foreground leading-relaxed mb-4">
+              We are a team of passionate individuals dedicated to creating exceptional experiences.
+            </p>
+            <p class="text-muted-foreground leading-relaxed">
+              Our journey began with a simple idea: to make a difference in the world through innovation and creativity.
+            </p>
+          </div>
+        `
+      },
+      {
+        id: 2,
+        content: `
+          <div class="page-content regular-content">
+            <h2 class="text-3xl font-bold text-foreground mb-6">What We Do</h2>
+            <ul class="space-y-4">
+              <li class="flex items-start">
+                <span class="text-primary mr-3 text-xl">•</span>
+                <span class="text-muted-foreground">Design beautiful and functional user interfaces</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-primary mr-3 text-xl">•</span>
+                <span class="text-muted-foreground">Build scalable and performant applications</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-primary mr-3 text-xl">•</span>
+                <span class="text-muted-foreground">Deliver exceptional user experiences</span>
+              </li>
+            </ul>
+          </div>
+        `
+      },
+      {
+        id: 3,
+        content: `
+          <div class="page-content regular-content">
+            <h2 class="text-3xl font-bold text-foreground mb-6">Our Values</h2>
+            <div class="space-y-6">
+              <div>
+                <h3 class="text-xl font-semibold text-foreground mb-2">Innovation</h3>
+                <p class="text-muted-foreground">We constantly push boundaries and explore new possibilities.</p>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-foreground mb-2">Quality</h3>
+                <p class="text-muted-foreground">Excellence is at the core of everything we create.</p>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-foreground mb-2">Collaboration</h3>
+                <p class="text-muted-foreground">Together, we achieve more than we ever could alone.</p>
+              </div>
+            </div>
+          </div>
+        `
+      },
+      {
+        id: 4,
+        content: `
+          <div class="page-content regular-content">
+            <h2 class="text-3xl font-bold text-foreground mb-6">Get in Touch</h2>
+            <p class="text-muted-foreground leading-relaxed mb-6">
+              Ready to work with us? We'd love to hear from you.
+            </p>
+            <div class="space-y-4">
+              <div>
+                <p class="text-sm text-muted-foreground">Email</p>
+                <p class="text-foreground font-medium">hello@example.com</p>
+              </div>
+              <div>
+                <p class="text-sm text-muted-foreground">Phone</p>
+                <p class="text-foreground font-medium">+1 (555) 123-4567</p>
+              </div>
+              <div>
+                <p class="text-sm text-muted-foreground">Location</p>
+                <p class="text-foreground font-medium">San Francisco, CA</p>
+              </div>
+            </div>
+          </div>
+        `
+      }
+    ];
+
+    let currentPage = 0;
+    let isFlipping = false;
+    const currentPageEl = document.getElementById('currentPage');
+    const previousPageEl = document.getElementById('previousPage');
+    const prevButton = document.getElementById('prevButton');
+    const nextButton = document.getElementById('nextButton');
+    const pageCounter = document.getElementById('pageCounter');
+
+    // Initialize pages
+    function initializePages() {
+      currentPageEl.innerHTML = pages[currentPage].content;
+      updateNavigation();
+    }
+
+    function nextPage() {
+      if (currentPage < pages.length - 1 && !isFlipping) {
+        isFlipping = true;
+        
+        // Hide current page during animation to prevent flicker
+        currentPageEl.style.opacity = '0';
+        
+        // Create flipping animation
+        const flippingPage = document.createElement('div');
+        flippingPage.className = 'flipping-page';
+        flippingPage.style.animation = 'flipForward 0.6s ease-in-out';
+        flippingPage.innerHTML = pages[currentPage].content; // Show current page during flip
+        
+        document.querySelector('.book').appendChild(flippingPage);
+        
+        setTimeout(() => {
+          currentPage++;
+          currentPageEl.innerHTML = pages[currentPage].content;
+          currentPageEl.style.opacity = '1';
+          
+          if (currentPage > 0) {
+            previousPageEl.innerHTML = pages[currentPage - 1].content;
+            previousPageEl.style.display = 'block';
+          } else {
+            previousPageEl.style.display = 'none';
+          }
+          
+          flippingPage.remove();
+          isFlipping = false;
+          updateNavigation();
+        }, 600);
+      }
+    }
+
+    function prevPage() {
+      if (currentPage > 0 && !isFlipping) {
+        isFlipping = true;
+        
+        // Create flipping animation
+        const flippingPage = document.createElement('div');
+        flippingPage.className = 'flipping-page';
+        flippingPage.style.animation = 'flipBackward 0.6s ease-in-out';
+        flippingPage.innerHTML = pages[currentPage].content;
+        
+        document.querySelector('.book').appendChild(flippingPage);
+        
+        setTimeout(() => {
+          currentPage--;
+          currentPageEl.innerHTML = pages[currentPage].content;
+          if (currentPage > 0) {
+            previousPageEl.innerHTML = pages[currentPage - 1].content;
+            previousPageEl.style.display = 'block';
+          } else {
+            previousPageEl.style.display = 'none';
+          }
+          
+          flippingPage.remove();
+          isFlipping = false;
+          updateNavigation();
+        }, 600);
+      }
+    }
+
+    function updateNavigation() {
+      pageCounter.textContent = `Page ${currentPage + 1} of ${pages.length}`;
+      prevButton.disabled = currentPage === 0 || isFlipping;
+      nextButton.disabled = currentPage === pages.length - 1 || isFlipping;
+    }
+
+    // Event listeners
+    prevButton.addEventListener('click', prevPage);
+    nextButton.addEventListener('click', nextPage);
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') nextPage();
+      if (e.key === 'ArrowLeft') prevPage();
+    });
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      initializePages();
+      lucide.createIcons();
+    });
+  </script>
+</body>
+</html>

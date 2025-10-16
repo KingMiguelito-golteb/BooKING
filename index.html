@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keyword" content="BooKING, booking, Books, Novels, Novel Books, booKING, books">
+    <meta name="description" content="Looking for novel books? Come and visit our webbsite to experience full novel surprises!">
+    <link rel="icon" href="Assets/logo.png">
+    <title>Welcome | BooKING</title>
+    <link rel="stylesheet" href="bootstrap-5.3.7-dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="welcome.css">
+    <link rel="stylesheet" href="preloader.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <div id="preloader">
+        <div data-us-project="Gx5ayOvlyRBC9F6s9YBr"></div>
+        <div id="preloader-message">
+            <h1>Welcome to BooKING</h1>
+            <p>Discover your next favorite book</p>
+        </div>
+    </div>
+
+    <div class="container main-content fade-in">
+        <div class="left-panel">
+            <div class="logo">
+                <div class="logo-image">
+                    <img src="Assets/last.png" alt="BooKING Logo">
+                </div>
+            </div>
+            <div class="welcome-text">
+                <h1>Welcome to <span id="name">BooKING</span></h1>
+                <h4 class="sub">Discover your next favorite book from our curated collection.</h4>
+            </div>
+        </div>
+        <div class="right-panel">
+            <div class="login-content">
+                <h1 id="form-title">Login to your Account</h1>
+                <h4 class="subtitle">Enter your credentials to access your account.</h4>
+<form onsubmit="return validateLogin()">
+                    <div class="form-group">
+                        <label for="email" style="font-weight:bold;">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" style="font-weight:bold;">Password</label>
+                        <input type="password" id="password" name="password" placeholder="•••••••••" required>
+                    </div>
+                    <div class="form-options">
+                        <div class="remember-me">
+                            <input type="checkbox" id="remember" name="remember">
+                            <label for="remember">Remember me</label>
+                        </div>
+                        <div class="forgot-password">
+                            <a href="#">Forgot your password?</a>
+                        </div>
+                    </div>
+                    <button type="submit" class="login-btn">Login</button>
+                </form>
+                <div class="signup-link">
+                    <p>New to BooKING? <a href="UserRegis.html">Sign up</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script> 
+    function validateLogin() {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    
+
+    const userData = localStorage.getItem('user_' + email);
+    
+    if (userData) {
+        const user = JSON.parse(userData);
+        if (user.password === password) {
+            alert('Login successful!');
+            window.location.href = 'home.html';
+        } else {
+            alert('Invalid password!');
+        }
+    } else {
+        alert('No account found with this email!');
+    }
+    
+    return false;
+}
+    
+    if (!window.UnicornStudioLoaded) {
+        window.UnicornStudioLoaded = true;
+        (function(){
+            if(!window.UnicornStudio){
+                window.UnicornStudio = {isInitialized:false};
+                const i = document.createElement("script");
+                i.src = "https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.33/dist/unicornStudio.umd.js";
+                i.onload = function(){
+                    if(!window.UnicornStudio.isInitialized){
+                        UnicornStudio.init();
+                        window.UnicornStudio.isInitialized = true;
+                    }
+                };
+                (document.head || document.body).appendChild(i);
+            }
+        })();
+    }
+
+  
+    function hideUnicornBranding() {
+        const elements = document.querySelectorAll('[class*="unicorn"], [class*="studio"], [class*="us-"]');
+        elements.forEach(el => {
+            if (el.textContent.includes('Unicorn') || el.textContent.includes('Studio') || el.textContent.includes('Made with')) {
+                el.style.display = 'none';
+            }
+        });
+        
+        const iframes = document.querySelectorAll('iframe');
+        iframes.forEach(iframe => {
+            try {
+                iframe.style.display = 'none';
+            } catch (e) {}
+        });
+    }
+
+
+    const brandingInterval = setInterval(hideUnicornBranding, 100);
+
+    if (!sessionStorage.getItem('preloaderShown')) {
+
+        setTimeout(() => {
+            const preloader = document.getElementById('preloader');
+            preloader.classList.add('fade-out');
+            clearInterval(brandingInterval);
+            
+            setTimeout(() => {
+
+                document.querySelector('.main-content').classList.add('show');
+                document.querySelector('.container').classList.add('fade-in-active');
+            }, 1000);
+        }, 5000);
+        
+
+        sessionStorage.setItem('preloaderShown', 'true');
+    } else {
+
+        document.getElementById('preloader').style.display = 'none';
+        document.querySelector('.main-content').classList.add('show');
+        document.querySelector('.container').classList.add('fade-in-active');
+        clearInterval(brandingInterval);
+    }
+
+
+    window.addEventListener('load', hideUnicornBranding);
+    document.addEventListener('DOMContentLoaded', hideUnicornBranding);</script>
+</body>
+</html>

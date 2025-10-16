@@ -1,0 +1,118 @@
+/* Your existing navigation styles */
+.navbar {
+    background-color: #ffffff;
+    padding: 1rem 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    width: 100%;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: 800;
+    background: linear-gradient(90deg,#FFD700, #FF3B3B, #FF8C00); 
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.nav-link {
+    color: #2E382E;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+}
+
+.nav-link:hover {
+    color: #50C9CE;
+    background-color: rgba(80, 201, 206, 0.1);
+}
+
+.nav-login .login-btn {
+    background-color: #CFF3F5;
+    color: Black;
+    text-decoration: none;
+    padding: 0.50rem 1.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.nav-login .login-btn:hover {
+    background-color: #45a8ac;
+}
+
+/* About page styles */
+.about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.about-container h1 {
+    text-align: center;
+    font-size: 3rem;
+    color: #2E382E;
+    margin-bottom: 1rem;
+}
+
+.about-subtitle {
+    text-align: center;
+    color: #666;
+    font-size: 1.2rem;
+    margin-bottom: 3rem;
+}
+
+.about-content {
+    margin-top: 4rem;
+    text-align: center;
+}
+
+.about-content h2 {
+    color: #2E382E;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.about-content p {
+    color: #666;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Flip gallery container */
+#flip-gallery-root {
+    margin: 3rem 0;
+}

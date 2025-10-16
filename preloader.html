@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BooKING Loader</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #000;
+      color: white;
+      font-family: "Poppins", sans-serif;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Loader area */
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #000;
+      z-index: 999;
+      transition: opacity 1s ease;
+    }
+
+    #loader.fade {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    [data-us-project] {
+      width: 800px;
+      height: 500px;
+      max-width: 90%;
+    }
+
+    /* Hide the "Made with unicorn studio" text */
+    [data-us-project]::after {
+      display: none !important;
+    }
+
+    /* Main site message */
+    #main {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 1s ease-in;
+      text-align: center;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    #main.show {
+      opacity: 1;
+    }
+
+    #main h1 {
+      font-size: 4rem;
+      background: linear-gradient(90deg, #FFD700, #FF3B3B, #FF8C00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 20px;
+      font-weight: 800;
+      text-align: center;
+      width: 100%;
+    }
+
+    #main p {
+      font-size: 1.5rem;
+      color: #ccc;
+      text-align: center;
+      width: 100%;
+    }
+
+    /* Additional CSS to hide Unicorn Studio branding */
+    .us-powered-by, 
+    [class*="unicorn"], 
+    [class*="studio"] {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+  <div id="loader">
+    <div data-us-project="Gx5ayOvlyRBC9F6s9YBr"></div>
+  </div>
+
+  <div id="main">
+    <h1>Welcome to BooKING</h1>
+    <p>Discover your next favorite book</p>
+  </div>
+
+  <script>
+    // Prevent multiple Unicorn Studio loads
+    if (!window.UnicornStudioLoaded) {
+      window.UnicornStudioLoaded = true;
+      (function(){
+        if(!window.UnicornStudio){
+          window.UnicornStudio = {isInitialized:false};
+          const i = document.createElement("script");
+          i.src = "https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.33/dist/unicornStudio.umd.js";
+          i.onload = function(){
+            if(!window.UnicornStudio.isInitialized){
+              UnicornStudio.init();
+              window.UnicornStudio.isInitialized = true;
+            }
+          };
+          (document.head || document.body).appendChild(i);
+        }
+      })();
+    }
+
+    // Hide Unicorn Studio branding elements
+    function hideUnicornBranding() {
+      const elements = document.querySelectorAll('[class*="unicorn"], [class*="studio"], [class*="us-"]');
+      elements.forEach(el => {
+        if (el.textContent.includes('Unicorn') || el.textContent.includes('Studio') || el.textContent.includes('Made with')) {
+          el.style.display = 'none';
+        }
+      });
+      
+      // Also check for any iframes or shadow DOM elements
+      const iframes = document.querySelectorAll('iframe');
+      iframes.forEach(iframe => {
+        try {
+          iframe.style.display = 'none';
+        } catch (e) {}
+      });
+    }
+
+    // Run branding removal periodically
+    const brandingInterval = setInterval(hideUnicornBranding, 100);
+
+    // Fade animation + redirect
+    setTimeout(() => {
+      const loader = document.getElementById('loader');
+      loader.classList.add('fade');
+      clearInterval(brandingInterval); // Stop checking for branding
+      setTimeout(() => {
+        document.getElementById('main').classList.add('show');
+      }, 1000);
+    }, 5000);
+
+    // Redirect to welcome.html after 6 seconds
+    setTimeout(() => {
+      window.location.href = "welcome.html";
+    }, 9000);
+
+    // Additional cleanup on load
+    window.addEventListener('load', hideUnicornBranding);
+    document.addEventListener('DOMContentLoaded', hideUnicornBranding);
+  </script>
+</body>
+</html>

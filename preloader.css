@@ -1,0 +1,85 @@
+/* Preloader Styles */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+    z-index: 9999;
+    transition: opacity 1s ease;
+}
+
+#preloader.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+[data-us-project] {
+    width: 800px;
+    height: 500px;
+    max-width: 90%;
+}
+
+/* Hide the "Made with unicorn studio" text */
+[data-us-project]::after {
+    display: none !important;
+}
+
+/* Preloader welcome message */
+#preloader-message {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 1s ease-in;
+    text-align: center;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#preloader-message.show {
+    opacity: 1;
+}
+
+#preloader-message h1 {
+    font-size: 4rem;
+    background: linear-gradient(90deg, #FFD700, #FF3B3B, #FF8C00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 20px;
+    font-weight: 800;
+    text-align: center;
+    width: 100%;
+}
+
+#preloader-message p {
+    font-size: 1.5rem;
+    color: #ccc;
+    text-align: center;
+    width: 100%;
+}
+
+/* Additional CSS to hide Unicorn Studio branding */
+.us-powered-by, 
+[class*="unicorn"], 
+[class*="studio"] {
+    display: none !important;
+}
+
+/* Main content starts hidden */
+.main-content {
+    opacity: 0;
+    transition: opacity 1s ease-in;
+}
+
+.main-content.show {
+    opacity: 1;
+}
